@@ -1,65 +1,73 @@
-import Link from "next/link";
-
-import { CreatePost } from "@/app/_components/create-post";
-import { api } from "@/trpc/server";
+import "@/styles/cards/cardStyles.scss";
+import "@/styles/text/cityLightEffect.css";
+import Image from "next/image";
 
 export default async function Home() {
-  const hello = await api.post.hello.query({ text: "from tRPC" });
-
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white">
-      <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16 ">
-        <h1 className="text-5xl font-extrabold tracking-tight sm:text-[5rem]">
-          Create <span className="text-[hsl(280,100%,70%)]">T3</span> App
-        </h1>
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-8">
-          <Link
-            className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4 hover:bg-white/20"
-            href="https://create.t3.gg/en/usage/first-steps"
-            target="_blank"
-          >
-            <h3 className="text-2xl font-bold">First Steps →</h3>
-            <div className="text-lg">
-              Just the basics - Everything you need to know to set up your
-              database and authentication.
-            </div>
-          </Link>
-          <Link
-            className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4 hover:bg-white/20"
-            href="https://create.t3.gg/en/introduction"
-            target="_blank"
-          >
-            <h3 className="text-2xl font-bold">Documentation →</h3>
-            <div className="text-lg">
-              Learn more about Create T3 App, the libraries it uses, and how to
-              deploy it.
-            </div>
-          </Link>
+    <main className="autumn fixed left-0 top-0 z-[-1] flex h-screen w-full items-center justify-center bg-purple-200 bg-opacity-40">
+      <div className="">
+        <div className="flex">
+        <div className="shadows_into_light cityLightEffect text-3xl text-white">
+          Your Brownie Stop
         </div>
-        <div className="flex flex-col items-center gap-2">
-          <p className="text-2xl text-white">
-            {hello ? hello.greeting : "Loading tRPC query..."}
-          </p>
         </div>
 
-        <CrudShowcase />
+          <div className="body mt-10">
+          <div className="container">
+            <div className="cards">
+              <div className="card card-one">
+                <h2 className="card-title">Nutella Brownies</h2>
+                <p className="date">Rs. 400</p>
+                <div className="description">
+                  Elevate your brownie game with nutella.
+                  <Image src="/brownie.jpg" alt="brownie" height={200} width={200} />
+                </div>
+
+              </div>
+              <div className="card card-two">
+                <h2 className="card-title">Card Two</h2>
+                <p className="date">May 26, 2021</p>
+                <p className="description">
+                  If you read carefully, you'll find that this is not your
+                  typical lorem ipsum.
+                </p>
+              </div>
+              <div className="card card-three">
+                <h2 className="card-title">Card Three</h2>
+                <p className="date">May 27, 2021</p>
+                <p className="description">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Dolores alias ut veniam?
+                </p>
+              </div>
+              <div className="card card-four">
+                <h2 className="card-title">Card Four</h2>
+                <p className="date">May 28, 2021</p>
+                <p className="description">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Dolores alias ut veniam?
+                </p>
+              </div>
+              <div className="card card-four">
+                <h2 className="card-title">Card Four</h2>
+                <p className="date">May 28, 2021</p>
+                <p className="description">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Dolores alias ut veniam?
+                </p>
+              </div>
+              <div className="card card-four">
+                <h2 className="card-title">Card Four</h2>
+                <p className="date">May 28, 2021</p>
+                <p className="description">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Dolores alias ut veniam?
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </main>
-  );
-}
-
-async function CrudShowcase() {
-  const latestPost = await api.post.getLatest.query();
-
-  return (
-    <div className="w-full max-w-xs">
-      {latestPost ? (
-        <p className="truncate">Your most recent post: {latestPost.name}</p>
-      ) : (
-        <p>You have no posts yet.</p>
-      )}
-
-      <CreatePost />
-    </div>
   );
 }
